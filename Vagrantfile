@@ -35,6 +35,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.network :private_network, ip: "192.168.50.4"
 
+  config.vm.synced_folder "config/", "/srv/config"
+  config.vm.synced_folder "wordpress/", "/srv/wordpress/", :owner => "www-data", :mount_options => [ "dmode=775", "fmode=774" ]
+
   config.vm.provision :shell, :path => "provision.sh"
 
 #  if defined? VagrantPlugins::Triggers
@@ -49,3 +52,4 @@ Vagrant.configure("2") do |config|
 #    end
 #  end
 end
+
