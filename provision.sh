@@ -46,6 +46,11 @@ if [[ ! -d /srv/database-admin ]]; then
     rm phpmyadmin.tar.gz
 fi
 
+if [ ! -f /etc/nginx/conf.d/php.conf ]
+then
+  ln -s /srv/config/nginx/php.conf /etc/nginx/conf.d/php.conf
+fi
+
 if [ ! -f /etc/nginx/sites-enabled/wordpress.conf ]
 then
   ln -s /srv/config/nginx/wordpress.conf /etc/nginx/sites-enabled/wordpress.conf
