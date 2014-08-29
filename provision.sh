@@ -2,34 +2,29 @@
 
 echo provisioning
 
-# PHP
-sudo apt-get install --assume-yes php5-fpm
-sudo apt-get install --assume-yes php5-cli
-sudo apt-get install --assume-yes php5-common
-sudo apt-get install --assume-yes php5-dev
-sudo apt-get install --assume-yes php5-mcrypt
-sudo apt-get install --assume-yes php5-mysql
-sudo apt-get install --assume-yes php5-curl
-
 gpg -q --keyserver keyserver.ubuntu.com --recv-key ABF5BD827BD9BF62
 gpg -q -a --export ABF5BD827BD9BF62 | apt-key add -
 
+sudo apt-get update
+
+# MySQL
+#
+# Use debconf-set-selections to specify the default password for the root MySQL
+# account. This runs on every provision, even if MySQL has been installed. If
+# MySQL is already installed, it will not affect anything.
+echo mysql-server mysql-server/root_password password root | debconf-set-selections
+echo mysql-server mysql-server/root_password_again password root | debconf-set-selections
+
 # Other LAMP dependencies
-sudo apt-get install --assume-yes nginx
-sudo apt-get install --assume-yes mysql-server
+sudo apt-get install --assume-yes nginx mysql-server
+# PHP
+sudo apt-get install --assume-yes php5-fpm php5-cli php5-common php5-dev php5-mcrypt php5-mysql php5-curl
 
 # Utilities
-sudo apt-get install --assume-yes git 
-sudo apt-get install --assume-yes zip 
-sudo apt-get install --assume-yes unzip 
-sudo apt-get install --assume-yes vim
-sudo apt-get install --assume-yes curl
-sudo apt-get install --assume-yes dos2unix
+sudo apt-get install --assume-yes git zip unzip vim curl dos2unix
 
 # Node
-sudo apt-get install --assume-yes g++
-sudo apt-get install --assume-yes npm 
-sudo apt-get install --assume-yes nodejs
+sudo apt-get install --assume-yes g++ npm nodejs
 
 if [ ! -f /usr/bin/node ]
 then
