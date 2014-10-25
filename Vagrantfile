@@ -41,6 +41,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :path => "provision.sh"
 
   config.vm.provision :shell, inline: "sudo service nginx restart", run: "always"
+  config.vm.provision :shell, inline: "sudo service mysql restart", run: "always"
 
 #  if defined? VagrantPlugins::Triggers
 #    config.trigger.before :halt, :stdout => true do
