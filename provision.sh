@@ -66,3 +66,7 @@ if [[ ! -f /srv/wordpress/wp-settings.php ]]; then
     rmdir /srv/wordpress/wordpress
     rm /srv/wordpress/latest.zip
 fi
+
+sudo service mysql restart
+
+mysql -u root -proot < /srv/config/db/wordpress.sql
